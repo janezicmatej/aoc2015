@@ -1,5 +1,5 @@
 pub fn part_one(input: &str) -> Option<u32> {
-    let count = input.matches("(").count() - input.matches(")").count();
+    let count = input.matches('(').count() - input.matches(')').count();
     Some(count.try_into().unwrap())
 }
 pub fn part_two(input: &str) -> Option<u32> {
