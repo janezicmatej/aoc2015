@@ -9,6 +9,7 @@ dependencies = [
  "dotenv",
  "hex-literal",
  "itertools",
+ "lazy_static",
  "pico-args",
  "reqwest",
  "rust-crypto",
