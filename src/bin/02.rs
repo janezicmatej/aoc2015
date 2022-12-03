@@ -42,14 +42,12 @@ mod tests {
     use super::*;
     #[test]
     fn test_part_one() {
-        // let input = aoc::read_file("test_inputs", 2);
-        let input = "2x3x4";
+        let input = aoc::read_file("test_inputs", 2);
         assert_eq!(part_one(&input), Some(58));
     }
     #[test]
     fn test_part_two() {
-        // let input = aoc::read_file("test_inputs", 2);
-        let input = "2x3x4";
+        let input = aoc::read_file("test_inputs", 2);
         assert_eq!(part_two(&input), Some(34));
     }
 }

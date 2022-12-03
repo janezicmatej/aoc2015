@@ -1,14 +1,14 @@
 pub fn part_one(input: &str) -> Option<u32> {
     let count = input.matches('(').count() - input.matches(')').count();
-    Some(count.try_into().unwrap())
+    Some(count as u32)
 }
 pub fn part_two(input: &str) -> Option<u32> {
     let mut floor = 0;
-    for (idx, char) in input.chars().enumerate() {
-        match char {
+    for (idx, c) in input.trim().chars().enumerate() {
+        match c {
             '(' => floor += 1,
             ')' => floor -= 1,
-            _ => panic!("oops"),
+            _ => panic!("oops {}", c),
         };
 
         if floor < 0 {
@@ -27,14 +27,12 @@ mod tests {
     use super::*;
     #[test]
     fn test_part_one() {
-        // let input = aoc::read_file("test_inputs", 1);
-        let input = "(()(()(";
+        let input = aoc::read_file("test_inputs", 1);
         assert_eq!(part_one(&input), Some(3));
     }
     #[test]
     fn test_part_two() {
-        // let input = aoc::read_file("test_inputs", 1);
-        let input = "()())";
-        assert_eq!(part_two(&input), Some(5));
+        let input = aoc::read_file("test_inputs", 1);
+        assert_eq!(part_two(&input), Some(11));
     }
 }

@@ -13,6 +13,3 @@ target/
 # downloaded inputs
 /src/inputs/*
 !/src/inputs/.keep
-
-/src/test_inputs/*
-!/src/test_inputs/.keep

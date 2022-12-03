@@ -64,15 +64,12 @@ mod tests {
     use super::*;
     #[test]
     fn test_part_one() {
-        // let input = aoc::read_file("test_inputs", 5);
-        let input = "aaa";
+        let input = aoc::read_file("test_inputs", 5);
         assert_eq!(part_one(&input), Some(1));
     }
     #[test]
     fn test_part_two() {
-        // let input = aoc::read_file("test_inputs", 5);
-        let input =
-            "qjhvhtzxzqqjkmpb\nxxyxx\nuurcxstgmygtbstg\nieodomkazucvgmuy\naaa";
+        let input = aoc::read_file("test_inputs", 5);
         assert_eq!(part_two(&input), Some(2));
     }
 }

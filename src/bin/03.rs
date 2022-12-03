@@ -53,14 +53,12 @@ mod tests {
     use super::*;
     #[test]
     fn test_part_one() {
-        // let input = aoc::read_file("test_inputs", 3);
-        let input = "^v^v^v^v^v";
+        let input = aoc::read_file("test_inputs", 3);
         assert_eq!(part_one(&input), Some(2));
     }
     #[test]
     fn test_part_two() {
-        // let input = aoc::read_file("test_inputs", 3);
-        let input = "^v^v^v^v^v";
+        let input = aoc::read_file("test_inputs", 3);
         assert_eq!(part_two(&input), Some(11));
     }
 }
