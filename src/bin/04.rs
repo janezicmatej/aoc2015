@@ -29,7 +29,9 @@ pub fn part_two(input: &str) -> Option<u32> {
         let mut output = [0; 16];
         hasher.result(&mut output);
 
-        if output.starts_with(&[0,0,0]) { return Some(x as u32)}
+        if output.starts_with(&[0, 0, 0]) {
+            return Some(x as u32);
+        }
         hasher.reset();
     }
     None

@@ -4,7 +4,7 @@ use itertools::Itertools;
 
 pub fn part_one(input: &str) -> Option<u32> {
     let mut visited = HashSet::with_capacity(input.len());
-    visited.insert((0,0));
+    visited.insert((0, 0));
     let mut x = 0;
     let mut y = 0;
     for direction in input.trim().chars() {
@@ -13,15 +13,15 @@ pub fn part_one(input: &str) -> Option<u32> {
             '<' => x -= 1,
             '^' => y += 1,
             'v' => y -= 1,
-            _ => panic!("oops")
+            _ => panic!("oops"),
         };
         visited.insert((x, y));
-    };
+    }
     Some(visited.len() as u32)
 }
 pub fn part_two(input: &str) -> Option<u32> {
     let mut visited = HashSet::with_capacity(input.len());
-    visited.insert((0,0));
+    visited.insert((0, 0));
     let (mut x1, mut y1, mut x2, mut y2) = (0, 0, 0, 0);
     for (santa, robot) in input.trim().chars().tuple_windows().step_by(2) {
         match santa {
@@ -29,7 +29,7 @@ pub fn part_two(input: &str) -> Option<u32> {
             '<' => x1 -= 1,
             '^' => y1 += 1,
             'v' => y1 -= 1,
-            _ => panic!("oops")
+            _ => panic!("oops"),
         };
         visited.insert((x1, y1));
         match robot {
@@ -37,10 +37,10 @@ pub fn part_two(input: &str) -> Option<u32> {
             '<' => x2 -= 1,
             '^' => y2 += 1,
             'v' => y2 -= 1,
-            _ => panic!("oops")
+            _ => panic!("oops"),
         };
         visited.insert((x2, y2));
-    };
+    }
     Some(visited.len() as u32)
 }
 fn main() {

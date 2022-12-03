@@ -63,19 +63,19 @@ impl From<&str> for Command {
 }
 
 pub fn part_one(input: &str) -> Option<u32> {
-    let mut a = [[0; 1000]; 1000];
+    let mut a = vec![[0; 1000]; 1000];
     for line in input.trim().split('\n') {
         let Command {
             instruction,
             from,
             to,
         } = Command::from(line);
-        for x in from.x..=to.x {
-            for y in from.y..=to.y {
+        for x in a.iter_mut().take(to.x + 1).skip(from.x) {
+            for y in x.iter_mut().take(to.y + 1).skip(from.y) {
                 match instruction {
-                    On => a[x][y] = 1,
-                    Off => a[x][y] = 0,
-                    Toggle => a[x][y] = 1 - a[x][y],
+                    On => *y = 1,
+                    Off => *y = 0,
+                    Toggle => *y = 1 - *y,
                 }
             }
         }
@@ -84,20 +84,20 @@ pub fn part_one(input: &str) -> Option<u32> {
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    let mut a = [[0; 1000]; 1000];
+    let mut a = vec![[0; 1000]; 1000];
     for line in input.trim().split('\n') {
         let Command {
             instruction,
             from,
             to,
         } = Command::from(line);
-        for x in from.x..=to.x {
-            for y in from.y..=to.y {
+        for x in a.iter_mut().take(to.x + 1).skip(from.x) {
+            for y in x.iter_mut().take(to.y + 1).skip(from.y) {
                 match instruction {
-                    On => a[x][y] = 1,
-                    Off if a[x][y] > 0 => a[x][y] -= 1,
-                    Off => (),
-                    Toggle => a[x][y] += 2,
+                    On => *y += 1,
+                    Toggle => *y += 2,
+                    Off if y > &mut 0 => *y -= 1,
+                    _ => (),
                 }
             }
         }
