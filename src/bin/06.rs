@@ -1,17 +1,15 @@
-use hashbrown::HashMap;
-
 use lazy_static::lazy_static;
 use regex::Regex;
 use Instruction::*;
 
 #[derive(Debug)]
 struct Point {
-    x: u32,
-    y: u32,
+    x: usize,
+    y: usize,
 }
 
-impl FromIterator<u32> for Point {
-    fn from_iter<T: IntoIterator<Item = u32>>(iter: T) -> Self {
+impl FromIterator<usize> for Point {
+    fn from_iter<T: IntoIterator<Item = usize>>(iter: T) -> Self {
         let mut it = iter.into_iter();
         Point {
             x: it.next().unwrap(),
@@ -52,15 +50,9 @@ impl From<&str> for Command {
             _ => unreachable!(),
         };
 
-        let from: Point = capture[2]
-            .split(',')
-            .map(|x| x.parse::<u32>().unwrap())
-            .collect();
+        let from: Point = capture[2].split(',').map(|x| x.parse().unwrap()).collect();
 
-        let to: Point = capture[3]
-            .split(',')
-            .map(|x| x.parse::<u32>().unwrap())
-            .collect();
+        let to: Point = capture[3].split(',').map(|x| x.parse().unwrap()).collect();
 
         Command {
             instruction,
@@ -71,7 +63,7 @@ impl From<&str> for Command {
 }
 
 pub fn part_one(input: &str) -> Option<u32> {
-    let mut map = HashMap::<(u32, u32), bool>::new();
+    let mut a = [[0; 1000]; 1000];
     for line in input.trim().split('\n') {
         let Command {
             instruction,
@@ -81,20 +73,18 @@ pub fn part_one(input: &str) -> Option<u32> {
         for x in from.x..=to.x {
             for y in from.y..=to.y {
                 match instruction {
-                    On => *map.entry((x, y)).or_default() = true,
-                    Off => *map.entry((x, y)).or_default() = false,
-                    Toggle => {
-                        map.entry((x, y)).or_default();
-                        map.insert((x, y), !map[&(x, y)]);
-                    }
+                    On => a[x][y] = 1,
+                    Off => a[x][y] = 0,
+                    Toggle => a[x][y] = 1 - a[x][y],
                 }
             }
         }
     }
-    Some(map.values().filter(|&x| *x).count() as u32)
+    Some(a.iter().map(|x| -> u32 { x.iter().sum() }).sum())
 }
+
 pub fn part_two(input: &str) -> Option<u32> {
-    let mut map = HashMap::<(u32, u32), u32>::new();
+    let mut a = [[0; 1000]; 1000];
     for line in input.trim().split('\n') {
         let Command {
             instruction,
@@ -104,19 +94,15 @@ pub fn part_two(input: &str) -> Option<u32> {
         for x in from.x..=to.x {
             for y in from.y..=to.y {
                 match instruction {
-                    On => *map.entry((x, y)).or_default() += 1,
-                    Toggle => *map.entry((x, y)).or_default() += 2,
-                    Off => {
-                        map.entry((x, y)).or_default();
-                        if map[&(x, y)] > 0 {
-                            *map.entry((x, y)).or_default() -= 1;
-                        }
-                    }
+                    On => a[x][y] = 1,
+                    Off if a[x][y] > 0 => a[x][y] -= 1,
+                    Off => (),
+                    Toggle => a[x][y] += 2,
                 }
             }
         }
     }
-    Some(map.values().into_iter().sum())
+    Some(a.iter().map(|x| -> u32 { x.iter().sum() }).sum())
 }
 fn main() {
     let input = &aoc::read_file("inputs", 6);
