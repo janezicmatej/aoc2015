@@ -25,12 +25,12 @@ mod tests {
     #[test]
     fn test_part_one() {
         let input = aoc::read_file("test_inputs", DAY);
-        assert_eq!(part_one(&input), None);
+        assert_eq!(part_one(&input.trim()), None);
     }
     #[test]
     fn test_part_two() {
         let input = aoc::read_file("test_inputs", DAY);
-        assert_eq!(part_two(&input), None);
+        assert_eq!(part_two(&input.trim()), None);
     }
 }
 "###;
