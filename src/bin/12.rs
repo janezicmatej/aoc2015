@@ -1,12 +1,12 @@
-use json::{parse, JsonValue::*, JsonValue};
+use serde_json::{Value, Value::*, from_str};
 
-fn parse_add(json_object: &JsonValue, skip_red: bool) -> i32 {
+fn parse_add(json_object: &Value, skip_red: bool) -> i32 {
     match json_object {
         Number(x) => x.to_string().parse::<i32>().unwrap_or(0),
         Object(x) => {
             if skip_red {
                 for (_, node) in x.iter() {
-                    if let Short { .. } = node {
+                    if let String { .. } = node {
                         if node.as_str() == Some("red") {
                             return 0;
                         }
@@ -21,10 +21,10 @@ fn parse_add(json_object: &JsonValue, skip_red: bool) -> i32 {
 }
 
 pub fn part_one(input: &str) -> Option<u32> {
-    Some(parse_add(&parse(input).unwrap(), false) as u32)
+    Some(parse_add(&from_str(input).unwrap(), false) as u32)
 }
 pub fn part_two(input: &str) -> Option<u32> {
-    Some(parse_add(&parse(input).unwrap(), true) as u32)
+    Some(parse_add(&from_str(input).unwrap(), true) as u32)
 }
 fn main() {
     let input = &aoc::read_file("inputs", 12);
