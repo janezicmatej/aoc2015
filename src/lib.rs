@@ -21,7 +21,7 @@ macro_rules! solve {
 
         fn print_result<T: Display>(func: impl FnOnce(&str) -> Option<T>, input: &str) {
             let timer = Instant::now();
-            let result = func(input);
+            let result = func(input.trim());
             let elapsed = timer.elapsed();
             match result {
                 Some(result) => {
