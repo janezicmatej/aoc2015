@@ -25,3 +25,6 @@ where
         })
         .collect()
 }
+
+pub const ASCII_LOWERCASE: &str = "abcdefghijklmnoqprstuvwxyz";
+pub const ASCII_UPPERCASE: &str = "ABCDEFGHIJKLMNOQPRSTUVWXYZ";
