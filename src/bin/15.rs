@@ -1,6 +1,6 @@
 use lazy_static::lazy_static;
 use regex::Regex;
-use std::{ops::Add, iter::once};
+use std::{iter::once, ops::Add};
 
 lazy_static! {
     static ref RE: Regex = Regex::new(r#"-?\d+"#).unwrap();

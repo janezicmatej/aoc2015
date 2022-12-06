@@ -1,4 +1,4 @@
-use serde_json::{Value, Value::*, from_str};
+use serde_json::{from_str, Value, Value::*};
 
 fn parse_add(json_object: &Value, skip_red: bool) -> i32 {
     match json_object {

@@ -1,6 +1,5 @@
 use dotenv::dotenv;
-use reqwest::blocking::Client;
-use reqwest::header;
+use reqwest::{blocking::Client, header};
 use std::{env, fs::OpenOptions, io::Write, process};
 
 fn main() {
@@ -28,9 +27,7 @@ fn main() {
 
     let client = Client::builder().default_headers(headers).build().unwrap();
     let res = client
-        .get(format!(
-            "https://adventofcode.com/{year}/day/{day}/input"
-        ))
+        .get(format!("https://adventofcode.com/{year}/day/{day}/input"))
         .send()
         .unwrap()
         .text()
