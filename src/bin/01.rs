@@ -8,7 +8,7 @@ pub fn part_two(input: &str) -> Option<u32> {
         match c {
             '(' => floor += 1,
             ')' => floor -= 1,
-            _ => panic!("oops {}", c),
+            _ => panic!("oops {c}"),
         };
 
         if floor < 0 {

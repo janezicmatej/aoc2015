@@ -13,7 +13,7 @@ fn main() {
     };
     dotenv().ok();
 
-    let day_padded = format!("{:02}", day);
+    let day_padded = format!("{day:02}");
     let token = env::var("TOKEN").expect("$TOKEN is not set");
     let year = env::var("YEAR")
         .expect("$YEAR is not set")
@@ -21,7 +21,7 @@ fn main() {
         .expect("$YEAR must be a number");
 
     let mut headers = header::HeaderMap::new();
-    let mut session_header = header::HeaderValue::from_str(format!("session={}", token).as_str())
+    let mut session_header = header::HeaderValue::from_str(format!("session={token}").as_str())
         .expect("Error building cookie header");
     session_header.set_sensitive(true);
     headers.insert(header::COOKIE, session_header);
@@ -29,15 +29,14 @@ fn main() {
     let client = Client::builder().default_headers(headers).build().unwrap();
     let res = client
         .get(format!(
-            "https://adventofcode.com/{}/day/{}/input",
-            year, day
+            "https://adventofcode.com/{year}/day/{day}/input"
         ))
         .send()
         .unwrap()
         .text()
         .unwrap();
 
-    let input_path = format!("src/inputs/{}.txt", day_padded);
+    let input_path = format!("src/inputs/{day_padded}.txt");
     let mut file = match OpenOptions::new()
         .write(true)
         .create(true)
@@ -45,7 +44,7 @@ fn main() {
     {
         Ok(file) => file,
         Err(e) => {
-            eprintln!("Failed to create module file: {}", e);
+            eprintln!("Failed to create module file: {e}");
             process::exit(1);
         }
     };
@@ -55,7 +54,7 @@ fn main() {
             println!("Downloaded input file \"{}\"", &input_path);
         }
         Err(e) => {
-            eprintln!("Failed to write module contents: {}", e);
+            eprintln!("Failed to write module contents: {e}");
             process::exit(1);
         }
     }

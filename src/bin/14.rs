@@ -46,7 +46,7 @@ impl From<&str> for Reindeer {
 pub fn part_one(input: &str) -> Option<u32> {
     input
         .split('\n')
-        .map(|x| Reindeer::from(x))
+        .map(Reindeer::from)
         .map(|y| {
             ((DISTANCE / y.cycle()) * y.duration
                 + vec![DISTANCE % y.cycle(), y.duration].iter().min().unwrap())
@@ -71,7 +71,7 @@ impl Scoreboard {
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    let reindeers = input.split('\n').map(|x| Reindeer::from(x)).collect_vec();
+    let reindeers = input.split('\n').map(Reindeer::from).collect_vec();
     let mut scoreboards = vec![Scoreboard::empty(); reindeers.len()];
 
     for traveled in 0..DISTANCE {
@@ -108,11 +108,11 @@ mod tests {
     #[test]
     fn test_part_one() {
         let input = aoc::read_file("test_inputs", 14);
-        assert_eq!(part_one(&input.trim()), Some(1120));
+        assert_eq!(part_one(input.trim()), Some(1120));
     }
     #[test]
     fn test_part_two() {
         let input = aoc::read_file("test_inputs", 14);
-        assert_eq!(part_two(&input.trim()), None);
+        assert_eq!(part_two(input.trim()), None);
     }
 }

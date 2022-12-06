@@ -87,11 +87,11 @@ mod tests {
     #[test]
     fn test_part_one() {
         let input = aoc::read_file("test_inputs", 13);
-        assert_eq!(part_one(&input.trim()), Some(330));
+        assert_eq!(part_one(input.trim()), Some(330));
     }
     #[test]
     fn test_part_two() {
         let input = aoc::read_file("test_inputs", 13);
-        assert_eq!(part_two(&input.trim()), Some(286));
+        assert_eq!(part_two(input.trim()), Some(286));
     }
 }

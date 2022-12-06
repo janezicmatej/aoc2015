@@ -14,7 +14,7 @@ fn allowed_password(password: &str) -> bool {
     if password
         .chars()
         .tuple_windows()
-        .map(|(a, b, c)| ASCII_LOWERCASE.contains(&format!("{}{}{}", a, b, c)))
+        .map(|(a, b, c)| ASCII_LOWERCASE.contains(&format!("{a}{b}{c}")))
         .filter(|&y| y)
         .count()
         == 0
@@ -24,7 +24,7 @@ fn allowed_password(password: &str) -> bool {
 
     if ASCII_LOWERCASE
         .chars()
-        .map(|a| password.contains(&format!("{}{}", a, a)))
+        .map(|a| password.contains(&format!("{a}{a}")))
         .filter(|&y| y)
         .count()
         < 2
@@ -107,11 +107,11 @@ mod tests {
     #[test]
     fn test_part_one() {
         let input = aoc::read_file("test_inputs", 11);
-        assert_eq!(part_one(&input.trim()), Some("ghjaabcc".to_string()));
+        assert_eq!(part_one(input.trim()), Some("ghjaabcc".to_string()));
     }
     #[test]
     fn test_part_two() {
         let input = aoc::read_file("test_inputs", 11);
-        assert_eq!(part_two(&input.trim()), Some("ghjbbcdd".to_string()));
+        assert_eq!(part_two(input.trim()), Some("ghjbbcdd".to_string()));
     }
 }
