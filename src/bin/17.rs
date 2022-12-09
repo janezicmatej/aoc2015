@@ -9,7 +9,7 @@ pub fn part_one(input: &str) -> Option<u32> {
                 containers
                     .iter()
                     .combinations(x)
-                    .map(|y| y.iter().map(|w| *w).sum::<u32>())
+                    .map(|y| y.iter().copied().sum::<u32>())
                     .filter(|&z| z == 150)
                     .count()
             })
@@ -23,12 +23,12 @@ pub fn part_two(input: &str) -> Option<u32> {
             containers
                 .iter()
                 .combinations(x)
-                .map(|y| (y.len(), y.iter().map(|w| *w).sum::<u32>()))
+                .map(|y| (y.len(), y.iter().copied().sum::<u32>()))
                 .filter(|(_, z)| z == &150)
                 .map(|(t, _)| t)
                 .collect_vec()
         })
-        .filter(|x| x.len() > 0)
+        .filter(|x| !x.is_empty())
         .map(|x| {
             let m = x.iter().min().unwrap();
             (*m, x.iter().filter(|&y| y == m).count())
